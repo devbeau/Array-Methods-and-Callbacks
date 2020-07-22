@@ -59,7 +59,7 @@ function getWinnersByYear(getWinners, getYears) {
     let winners = getWinners;
     let years = getYears;
     years.forEach(function (item, index){
-      stringArray.push(`In ${item}, ${winners[index]} won the cup!`)
+      stringArray.push(`In ${item}, ${winners[index]} won the world cup!`)
     });
     return stringArray;
 }
@@ -89,14 +89,35 @@ console.log("This is Task 7:", getAverageGoals(getFinals(fifaData)));
 Hint: Investigate your data to find "team initials"!
 Hint: use `.reduce` */
 
-function getCountryWins(/* code here */) {
+function getCountryWins(data, teamInitials) {
 
-    /* code here */
+    let winningInitials = [];
+    function initialsFunction(data) {
+        return (data.map((item) => {
+            if (item["Home Team Goals"] > item["Away Team Goals"]){
+                console.log(item["Home Team Initials"]);
+                return item["Home Team Initials"];
+            } else {
+                console.log(item["Away Team Initials"]);
+                return item["Home Team Initials"];
+            }
+        }))
+    };
+    winningInitials = initialsFunction(data);
+    console.log(winningInitials);
 
+    const winningBool = winningInitials.map((item) => {
+        if (teamInitials === item){
+            return 1;
+        }
+        else {return 0;}
+    })
+    console.log(winningBool);
+    
+   return winningBool.reduce((acc, cur) => acc + cur);
 };
 
-getCountryWins();
-
+console.log(getCountryWins(getFinals(fifaData), "ARG"));
 
 /* Stretch 3: Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
 
