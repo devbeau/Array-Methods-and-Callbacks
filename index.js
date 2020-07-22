@@ -117,16 +117,35 @@ function getCountryWins(data, teamInitials) {
    return winningBool.reduce((acc, cur) => acc + cur);
 };
 
-console.log(getCountryWins(getFinals(fifaData), "ARG"));
+console.log("This is Stretch 1:", getCountryWins(getFinals(fifaData), "ARG"));
 
 /* Stretch 3: Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
 
-function getGoals(/* code here */) {
+function getGoals(data) {
 
-    /* code here */
+   function teamGoals(teamInitials){  
+       data.map((item) => {
+       if (item["Home Team Initials"] === teamInitials){
+            return [item["Home Team Initials"], item["Home Team Goals"], 1];
+        } else if (item["Away Team Initials"] === teamInitials){
+            return [item["Away Team Initials"], item["Away Team Goals"], 1];
+        }
 
-};
+        });
+    return teamGoals(teamInitials);
+    }   
+    const uruGoals = (teamGoals("URU").reduce((acc, cur) => acc + cur) / teamGoals("URU").length);
+    const itaGoals = (teamGoals("ITA").reduce((acc, cur) => acc + cur) / teamGoals("ITA").length);
+    const frgGoals = (teamGoals("FRG").reduce((acc, cur) => acc + cur) / teamGoals("FRG").length);
+    const braGoals = (teamGoals("BRA").reduce((acc, cur) => acc + cur) / teamGoals("BRA").length);
+    const argGoals = (teamGoals("ARG").reduce((acc, cur) => acc + cur) / teamGoals("ARG").length);
+    const fraGoals = (teamGoals("FRA").reduce((acc, cur) => acc + cur) / teamGoals("FRA").length);
+    const espGoals = (teamGoals("ESP").reduce((acc, cur) => acc + cur) / teamGoals("ESP").length);
+    const gerGoals = (teamGoals("GER").reduce((acc, cur) => acc + cur) / teamGoals("GER").length);
 
+    let mostGoals = Math.max(uruGoals, itaGoals, frgGoals, braGoals,argGoals, fraGoals, espGoals,gerGoals);
+
+}
 getGoals();
 
 
