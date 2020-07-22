@@ -123,30 +123,72 @@ console.log("This is Stretch 1:", getCountryWins(getFinals(fifaData), "ARG"));
 
 function getGoals(data) {
 
-   function teamGoals(teamInitials){  
-       data.map((item) => {
-       if (item["Home Team Initials"] === teamInitials){
-            return [item["Home Team Initials"], item["Home Team Goals"], 1];
-        } else if (item["Away Team Initials"] === teamInitials){
-            return [item["Away Team Initials"], item["Away Team Goals"], 1];
-        }
-
+   function teamApp(teamInitials){  
+       const appearArr = data.filter((item) => {
+        return (item["Home Team Initials"] === teamInitials || item["Away Team Initials"] === teamInitials)
         });
-    return teamGoals(teamInitials);
-    }   
-    const uruGoals = (teamGoals("URU").reduce((acc, cur) => acc + cur) / teamGoals("URU").length);
-    const itaGoals = (teamGoals("ITA").reduce((acc, cur) => acc + cur) / teamGoals("ITA").length);
-    const frgGoals = (teamGoals("FRG").reduce((acc, cur) => acc + cur) / teamGoals("FRG").length);
-    const braGoals = (teamGoals("BRA").reduce((acc, cur) => acc + cur) / teamGoals("BRA").length);
-    const argGoals = (teamGoals("ARG").reduce((acc, cur) => acc + cur) / teamGoals("ARG").length);
-    const fraGoals = (teamGoals("FRA").reduce((acc, cur) => acc + cur) / teamGoals("FRA").length);
-    const espGoals = (teamGoals("ESP").reduce((acc, cur) => acc + cur) / teamGoals("ESP").length);
-    const gerGoals = (teamGoals("GER").reduce((acc, cur) => acc + cur) / teamGoals("GER").length);
-
-    let mostGoals = Math.max(uruGoals, itaGoals, frgGoals, braGoals,argGoals, fraGoals, espGoals,gerGoals);
-
+    return appearArr;
+    }
+    const appearArr = teamApp("ITA");
+    console.log(teamApp("URU"));
+    function teamGoals(teamInitials){
+    const appearGoal = appearArr.map((item) => {
+        if (item["Home Team Initials"] === teamInitials){
+            return item["Home Team Goals"];
+        } else {return item["Away Team Goals"];}
+    })
+    return appearGoal;
+};
+    
+    const itaGoalsAvg = (teamGoals("ITA").reduce((acc, cur) => acc + cur)) / teamApp("ITA").length;
+    const uruGoalsAvg = (teamGoals("URU").reduce((acc, cur) => acc + cur)) / teamApp("URU").length;
+    const frgGoalsAvg = (teamGoals("FRG").reduce((acc, cur) => acc + cur)) / teamApp("FRG").length;
+    const braGoalsAvg = (teamGoals("BRA").reduce((acc, cur) => acc + cur)) / teamApp("BRA").length;
+    const argGoalsAvg = (teamGoals("ARG").reduce((acc, cur) => acc + cur)) / teamApp("ARG").length;
+    const fraGoalsAvg = (teamGoals("FRA").reduce((acc, cur) => acc + cur)) / teamApp("FRA").length;
+    const espGoalsAvg = (teamGoals("ESP").reduce((acc, cur) => acc + cur)) / teamApp("ESP").length;
+    const gerGoalsAvg = (teamGoals("GER").reduce((acc, cur) => acc + cur)) / teamApp("GER").length;
+    const tchGoalsAvg = (teamGoals("TCH").reduce((acc, cur) => acc + cur)) / teamApp("TCH").length;
+    const hunGoalsAvg = (teamGoals("HUN").reduce((acc, cur) => acc + cur)) / teamApp("HUN").length;
+    const sweGoalsAvg = (teamGoals("SWE").reduce((acc, cur) => acc + cur)) / teamApp("SWE").length;
+    const engGoalsAvg = (teamGoals("ENG").reduce((acc, cur) => acc + cur)) / teamApp("ENG").length;
+    const nedGoalsAvg = (teamGoals("NED").reduce((acc, cur) => acc + cur)) / teamApp("NED").length;
+    const mostGoals = Math.max(itaGoalsAvg, uruGoalsAvg, frgGoalsAvg,braGoalsAvg,argGoalsAvg, fraGoalsAvg, espGoalsAvg, gerGoalsAvg, tchGoalsAvg, hunGoalsAvg, sweGoalsAvg, engGoalsAvg, nedGoalsAvg);
+    console.log(itaGoalsAvg, uruGoalsAvg, frgGoalsAvg,braGoalsAvg,argGoalsAvg, fraGoalsAvg, espGoalsAvg, gerGoalsAvg, tchGoalsAvg, hunGoalsAvg, sweGoalsAvg, engGoalsAvg, nedGoalsAvg);
+    if (mostGoals === itaGoalsAvg){return "Italy"}
+    else if (mostGoals === uruGoalsAvg){return "Uruguay"}
+    else if (mostGoals === frgGoalsAvg){return "Federal German Republic"}
+    else if (mostGoals === braGoalsAvg){return "Brazil"}
+    else if (mostGoals === argGoalsAvg){return "Argentina"}
+    else if (mostGoals === fraGoalsAvg){return "France"}
+    else if (mostGoals === espGoalsAvg){return "Spain"}
+    else if (mostGoals === gerGoalsAvg){return "Germany"}
+    else if (mostGoals === tchGoalsAvg){return "Czech Republic"}
+    else if (mostGoals === hunGoalsAvg){return "Hungary"}
+    else if (mostGoals === sweGoalsAvg){return "Sweden"}
+    else if (mostGoals === engGoalsAvg){return "England"}
+    else if (mostGoals === nedGoalsAvg){return "The Netherlands"}
+    
 }
-getGoals();
+
+
+    // const uruGoals = (teamGoals("URU").reduce((acc, cur) => acc + cur) / teamGoals("URU").length);
+    // const itaGoals = (teamGoals("ITA").reduce((acc, cur) => acc + cur) / teamGoals("ITA").length);
+    // const frgGoals = (teamGoals("FRG").reduce((acc, cur) => acc + cur) / teamGoals("FRG").length);
+    // const braGoals = (teamGoals("BRA").reduce((acc, cur) => acc + cur) / teamGoals("BRA").length);
+    // const argGoals = (teamGoals("ARG").reduce((acc, cur) => acc + cur) / teamGoals("ARG").length);
+    // const fraGoals = (teamGoals("FRA").reduce((acc, cur) => acc + cur) / teamGoals("FRA").length);
+    // const espGoals = (teamGoals("ESP").reduce((acc, cur) => acc + cur) / teamGoals("ESP").length);
+    // const gerGoals = (teamGoals("GER").reduce((acc, cur) => acc + cur) / teamGoals("GER").length);
+    // const tch
+    // const hun
+    // const swe
+    // const eng
+    // const ned
+    // let mostGoals = Math.max(uruGoals, itaGoals, frgGoals, braGoals,argGoals, fraGoals, espGoals,gerGoals);
+
+
+console.log(getGoals(getFinals(fifaData)));
 
 
 /* Stretch 4: Write a function called badDefense() that accepts a parameter `data` and calculates the team with the most goals scored against them per appearance (average goals against) in the World Cup finals */
